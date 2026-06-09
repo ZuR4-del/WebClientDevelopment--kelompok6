@@ -26,7 +26,7 @@ Company Profile / Web Jasa Layanan (Kesehatan & Nutrisi)
 ## Figma Design (UI/UX Wireframe)
 Berikut adalah link desain wireframe untuk aplikasi ini:
 
-🔗 [https://www.figma.com/design/4DhgfenzzQBue1G2oqk3bu/Nutritionist---Light-Theme-Healthy-Diet-Planning-Website-UI-Design-Template---FREE-Editable----Community-?node-id=141-2086&t=orKjN3pJCmOzfPqI-1)
+🔗 [https://www.figma.com/design/4DhgfenzzQBue1G2oqk3bu/Dietary---Kelompok-6?node-id=18-256&t=RO3pANu3JkAQhojD-1)
 
 ### Halaman yang dirancang:
 1. **Beranda** - Tampilan utama dengan hero section dan layanan unggulan
