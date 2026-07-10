@@ -1,41 +1,78 @@
-# WebClientDevelopment--kelompok6
+# Dietary — Personalized Nutrition Coaching (UAS Project)
 
-## Anggota kelompok
-1. Roby cahya insani (25120300006)
-2. Rodina Fitriani (25120300007)
-3. Stefany imanuel Sihombing (25120300028)
+Realisasi React.js dari desain Figma "Dietary" (Home Page - Desktop).
 
-## Deskripsi proyek
-**Nutritionist (DECTARY)** adalah website company profile untuk layanan konsultasi nutrisi dan coaching kesehatan personal. Website ini membantu pengguna mendapatkan panduan nutrisi yang terpersonalisasi, terpercaya, dan mudah diakses.
+## Struktur Halaman (React Router)
+Aplikasi ini multi-halaman menggunakan `react-router-dom` — setiap menu di Navbar benar-benar
+pindah halaman (bukan cuma anchor scroll).
 
-### Latar Belakang Masalah
-- Banyak orang gagal diet karena mengikuti tren diet di internet tanpa mempertimbangkan kebutuhan tubuh masing-masing
-- Biaya konsultasi tatap muka dengan ahli gizi masih tergolong mahal dan kurang praktis
+| Route       | File                        | Isi                                                              |
+|-------------|-----------------------------|-------------------------------------------------------------------|
+| `/`         | `src/pages/Home.jsx`        | Hero, Features, Blogs (preview), Testimonials, Pricing (preview)   |
+| `/about`    | `src/pages/About.jsx`       | Welcome + Our Story (timeline) + Company Achievements              |
+| `/process`  | `src/pages/Process.jsx`     | **Placeholder** — desain Figma-nya belum dikirim, edit bebas       |
+| `/pricing`  | `src/pages/PricingPage.jsx` | Pricing detail + tabel perbandingan fitur + FAQ accordion          |
+| `/blog`     | `src/pages/BlogPage.jsx`    | Blog listing + filter kategori (fetch API per kategori)            |
+| `/contact`  | `src/pages/Contact.jsx`     | Form kontak (controlled input via useState) + info kontak          |
 
-Target Audience
-| Segmen | Karakteristik |
-|--------|---------------|
-| Dewasa Muda (18-30 tahun) | Aktif di media sosial, peduli penampilan & gaya hidup sehat |
-| Profesional Sibuk | Butuh panduan nutrisi praktis di tengah jadwal padat |
-| Individu Hidup Sehat | Mencari informasi pola makan seimbang & konsultasi ahli |
-| Program Penurunan Berat Badan | Membutuhkan rencana diet terstruktur & dukungan nutrisionis |
+`src/components/Layout.jsx` membungkus semua halaman dengan `Navbar` + `Footer` yang sama.
 
-## Tema
-Company Profile / Web Jasa Layanan (Kesehatan & Nutrisi)
+## Struktur Komponen
+- `src/components/Navbar.jsx` — top announcement bar + navigasi antar-halaman (NavLink)
+- `src/components/Hero.jsx` — hero section dengan CTA
+- `src/components/Features.jsx` — 6 kartu fitur
+- `src/components/Blogs.jsx` — **useEffect + fetch API (Dev.to)** + **useState** (like & bookmark) — preview di homepage
+- `src/components/Testimonials.jsx` — carousel testimoni (useState untuk slide aktif)
+- `src/components/Pricing.jsx` — **useState** toggle Monthly/Yearly — preview di homepage
+- `src/components/Footer.jsx` — footer
+- `src/components/PageHeader.jsx` — banner hijau reusable di halaman About/Pricing/Blog/Contact
+- `src/components/ImagePlaceholder.jsx` — kotak placeholder untuk foto yang belum di-export dari Figma
 
-## Figma Design (UI/UX Wireframe)
-Berikut adalah link desain wireframe untuk aplikasi ini:
+## Catatan Penting Sebelum Demo
+1. **Halaman Process** (`/process`) belum ada desain Figma-nya saat dikerjakan, jadi masih
+   placeholder sederhana. Kirim desainnya kalau ada, atau edit langsung kontennya.
+2. Foto-foto di halaman **About → Our Story** (10 kartu timeline) belum tersedia sebagai aset
+   terpisah dari screenshot Figma. Saat ini ditampilkan sebagai kotak placeholder hijau + ikon.
+   Export tiap foto dari Figma dan ganti di `src/pages/About.jsx` (komponen `ImagePlaceholder`)
+   supaya 1:1 dengan desain.
+3. Peta di halaman **Contact** masih placeholder — ganti dengan embed Google Maps (`<iframe>`)
+   sesuai lokasi asli.
 
-🔗 [https://www.figma.com/design/4DhgfenzzQBue1G2oqk3bu/Dietary---Kelompok-6?node-id=18-256&t=RO3pANu3JkAQhojD-1)
+## Cara Menjalankan (Lokal)
 
-### Halaman yang dirancang:
-1. **Beranda** - Tampilan utama dengan hero section dan layanan unggulan
-2. **About** - Profil perusahaan dan tim
-3. **Proces** - 4 langkah perjalanan kesehatan: Initial Consultation → Training Modules → Nutrition Plans → Well-Being Coaching
-4. **Pricing** -  3 paket layanan: Basic (Rp49k/bln), Premium, Enterprise 
-5. **Blog** - Artikel edukasi tentang nutrisi, tips diet sehat, gaya hidup
-6. **contact** - Form kontak dan informasi layanan
+```bash
+npm install
+npm run dev
+```
 
-### Versi Responsif:
-- ✅ Desktop (Layar laptop)
-- ✅ Mobile (Layar HP)
+Buka `http://localhost:5173`.
+
+## Sebelum Demo: Lengkapi Aset Ilustrasi
+
+Desain asli memakai ilustrasi karakter (perempuan makan sambil pegang HP, ilustrasi blog, dll)
+yang tidak bisa saya ambil otomatis dari screenshot. Supaya tampilan 1:1 dengan Figma:
+
+1. Export ilustrasi hero dari Figma sebagai PNG/SVG.
+2. Simpan sebagai `src/assets/hero-illustration.png`.
+3. Untuk gambar blog, komponen `Blogs.jsx` sudah otomatis mengambil gambar dari API Dev.to,
+   jadi tidak perlu aset manual — tapi kamu boleh menggantinya jika ingin gambar ilustrasi
+   kartun sesuai desain asli.
+
+## Integrasi Public API
+
+`Blogs.jsx` menggunakan **Dev.to API** (`https://dev.to/api/articles?tag=health`) untuk menarik
+artikel kesehatan/nutrisi secara real-time — tidak butuh API key, gratis, dan CORS-friendly.
+
+## Deploy ke Vercel
+
+1. Push folder ini ke repository GitHub.
+2. Buka [vercel.com](https://vercel.com) → **New Project** → import repo tersebut.
+3. Framework preset: **Vite** (otomatis terdeteksi).
+   - Build command: `npm run build`
+   - Output directory: `dist`
+4. Klik **Deploy**. Setelah selesai kamu akan mendapat URL live (`https://namaproject.vercel.app`).
+
+## Responsivitas
+Layout memakai grid Bootstrap 5 (`row`, `col-md-*`, `col-lg-*`) sehingga otomatis menyesuaikan
+dari Desktop ke Mobile. Uji dengan Chrome DevTools (Toggle Device Toolbar) di lebar 375px, 768px,
+dan 1440px sebelum demo.
